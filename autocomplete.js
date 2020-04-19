@@ -41,7 +41,11 @@ let autocomplete = (function () {
 				b.innerHTML = _arr[i].substr(0, startIndex);
 				b.innerHTML += "<b>" + _arr[i].substr(startIndex, val.length) + "</b>";
 				b.innerHTML += _arr[i].substr(startIndex + val.length);
-				b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
+				if(_arr[i].includes("'")) {
+					b.innerHTML += "<input type='hidden' value=\"" + _arr[i] + "\">";
+				} else {
+					b.innerHTML += "<input type='hidden' value=\'" + _arr[i] + "\''>";
+				}
 				b.addEventListener("click", function(e) {
 					_inp.value = this.getElementsByTagName("input")[0].value;
 					onSearch();
