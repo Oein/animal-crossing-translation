@@ -35,10 +35,12 @@ let autocomplete = (function () {
 		console.log(this.parentNode);
 
 		for(i=0; i<_arr.length; i++) {
-			if(_arr[i].substr(0, val.length) == val) {
+			if(_arr[i].includes(val)) {
 				b = document.createElement("div");
-				b.innerHTML = "<b>" + _arr[i].substr(0, val.length) + "</b>";
-				b.innerHTML += _arr[i].substr(val.length);
+				startIndex = _arr[i].indexOf(val);
+				b.innerHTML = _arr[i].substr(0, startIndex);
+				b.innerHTML += "<b>" + _arr[i].substr(startIndex, val.length) + "</b>";
+				b.innerHTML += _arr[i].substr(startIndex + val.length);
 				b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 				b.addEventListener("click", function(e) {
 					_inp.value = this.getElementsByTagName("input")[0].value;
@@ -54,8 +56,10 @@ let autocomplete = (function () {
 		console.log('occur keyEvent');
 		console.log(e.keyCode);
 		var x = document.getElementById(this.id + "autocomplete-list");
+		console.log(x);
 		if(x) {
 			x = x.getElementsByTagName("div");
+			console.log(x);
 		}
 		if (e.keyCode == 40) {
 			_currentFoucs++;
@@ -75,7 +79,7 @@ let autocomplete = (function () {
 	let addActive = function(x) {
 		if(!x)
 			return false;
-		removeActive();
+		removeActive(x);
 		if(_currentFoucs >= x.length)
 			_currentFoucs = 0;
 		if(_currentFoucs < 0)
@@ -85,7 +89,7 @@ let autocomplete = (function () {
 
 	let removeActive = function(x) {
 		for(var i=0; i<x.length; i++) {
-			x[i].classList.remove("autocomplete-actiove");
+			x[i].classList.remove("autocomplete-active");
 		}
 	}
 
