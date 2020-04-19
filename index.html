@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <script type="text/javascript" src="./data.js"></script>
 <link rel="stylesheet" href="./autocomplete.css">
+<link rel="stylesheet" href="./index.css">
 <script type="text/javascript" src="./autocomplete.js"></script>
 <script>
 	window.onload = function () { 
@@ -48,7 +49,12 @@
 			<meta charset="utf-8"/>
 		</head>
 		<body>
+			<hr class="separateLine"/>
+			<div class="titleDiv">
+				<b>ACNH<br>UnLocalize</b>
+			</div>
 			<div class="selectLanguage" onchange="onLanguageChanged()">
+				Languague
 				<select id="languageSelect">
 					<option value="usen">USen</option>
 					<option value="krko" selected>KRko</option>
@@ -63,21 +69,26 @@
 					<option value="euit">EUit</option>
 				</select>
 			</div>
+			<br>
 			<div class="srch_form autocomplete">
 				<input id="searchedName">
 			</div>
 			<button onclick="onSearch()">검색</button>
+			<br><br>
+			<hr class="separateLine"/>
 			<br><br><br>
-			<div id="usen"><b>USen</b> : </div>
-			<div id="krko"><b>KRko</b> : </div>
-			<div id="jpja"><b>JPja</b> : </div>
-			<div id="uses"><b>USes</b> : </div>
-			<div id="usfr"><b>USfr</b> : </div>
-			<div id="cnzh"><b>CNzh</b> : </div>
-			<div id="eude"><b>EUde</b> : </div>
-			<div id="euen"><b>EUen</b> : </div>
-			<div id="eues"><b>EUes</b> : </div>
-			<div id="eufr"><b>EUfr</b> : </div>
-			<div id="euit"><b>EUit</b> : </div>
+			<div class="translationDiv">
+				<div id="usen"><b>USen</b> : </div>
+				<div id="krko"><b>KRko</b> : </div>
+				<div id="jpja"><b>JPja</b> : </div>
+				<div id="uses"><b>USes</b> : </div>
+				<div id="usfr"><b>USfr</b> : </div>
+				<div id="cnzh"><b>CNzh</b> : </div>
+				<div id="eude"><b>EUde</b> : </div>
+				<div id="euen"><b>EUen</b> : </div>
+				<div id="eues"><b>EUes</b> : </div>
+				<div id="eufr"><b>EUfr</b> : </div>
+				<div id="euit"><b>EUit</b> : </div>
+			</div>
 		</body>
 </html>
