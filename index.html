@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="./data.js"></script>
+<link rel="stylesheet" href="./autocomplete.css">
+<script type="text/javascript" src="./autocomplete.js"></script>
+<script>
+	window.onload = function () { autocomplete.setAutocomplete(document.getElementById("searchedName"), autoWords) };
+	function onSearch() {
+		searchedName = document.getElementById("searchedName").value;
+		for(word in words) {
+			var curWord = words[word];
+			if(searchedName == curWord[7]) {
+				document.getElementById("english").innerHTML = "<b>English</b> : " + curWord[0];
+				document.getElementById("chinese").innerHTML = "<b>Chinese</b> : " + curWord[1];
+				document.getElementById("german").innerHTML = "<b>German</b> : " + curWord[2];
+				document.getElementById("spanish").innerHTML = "<b>Spanish</b> : " + curWord[3];
+				document.getElementById("french").innerHTML = "<b>French</b> : " + curWord[4];
+				document.getElementById("italian").innerHTML = "<b>Italian</b> : " + curWord[5];
+				document.getElementById("japanese").innerHTML = "<b>Japanese</b> : " + curWord[6];
+				document.getElementById("korean").innerHTML = "<b>Korean</b> : " + curWord[7];
+				document.getElementById("dutch").innerHTML = "<b>Dutch</b> : " + curWord[8];
+				break;
+			}
+		}
+		
+	}
+</script>
+<html>
+		<head>
+			<meta charset="utf-8"/>
+		</head>
+		<body>
+			<div class="srch_form autocomplete">
+				<input id="searchedName">
+			</div>
+			<button onclick="onSearch()">검색</button>
+			<br><br><br>
+			<div id="english"><b>English</b> : </div>
+			<div id="chinese"><b>Chinese</b> : </div>
+			<div id="german"><b>German</b> : </div>
+			<div id="spanish"><b>Spanish</b> : </div>
+			<div id="french"><b>French</b> : </div>
+			<div id="italian"><b>Italian</b> : </div>
+			<div id="japanese"><b>Japanese</b> : </div>
+			<div id="korean"><b>Korean</b> : </div>
+			<div id="dutch"><b>Dutch</b> : </div>
+		</body>
+</html>
