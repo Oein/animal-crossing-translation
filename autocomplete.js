@@ -42,6 +42,7 @@ let autocomplete = (function () {
 				b.innerHTML += "<input type='hidden' value='" + _arr[i] + "'>";
 				b.addEventListener("click", function(e) {
 					_inp.value = this.getElementsByTagName("input")[0].value;
+					onSearch();
 					closeAllLists();
 				})
 				a.appendChild(b);
@@ -51,7 +52,8 @@ let autocomplete = (function () {
 
 	let keydownEvent = function(e) {
 		console.log('occur keyEvent');
-		var x = document.getElementById(this.id + "autoComplete-list");
+		console.log(e.keyCode);
+		var x = document.getElementById(this.id + "autocomplete-list");
 		if(x) {
 			x = x.getElementsByTagName("div");
 		}

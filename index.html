@@ -3,25 +3,44 @@
 <link rel="stylesheet" href="./autocomplete.css">
 <script type="text/javascript" src="./autocomplete.js"></script>
 <script>
-	window.onload = function () { autocomplete.setAutocomplete(document.getElementById("searchedName"), autoWords) };
+	window.onload = function () { 
+			var autoWords = getSelectedLangaugeAutoWords();
+			autocomplete.setAutocomplete(document.getElementById("searchedName"), autoWords)
+		};
 	function onSearch() {
+		langSelect = document.getElementById("languageSelect");
 		searchedName = document.getElementById("searchedName").value;
 		for(word in words) {
 			var curWord = words[word];
-			if(searchedName == curWord[7]) {
-				document.getElementById("english").innerHTML = "<b>English</b> : " + curWord[0];
-				document.getElementById("chinese").innerHTML = "<b>Chinese</b> : " + curWord[1];
-				document.getElementById("german").innerHTML = "<b>German</b> : " + curWord[2];
-				document.getElementById("spanish").innerHTML = "<b>Spanish</b> : " + curWord[3];
-				document.getElementById("french").innerHTML = "<b>French</b> : " + curWord[4];
-				document.getElementById("italian").innerHTML = "<b>Italian</b> : " + curWord[5];
-				document.getElementById("japanese").innerHTML = "<b>Japanese</b> : " + curWord[6];
-				document.getElementById("korean").innerHTML = "<b>Korean</b> : " + curWord[7];
-				document.getElementById("dutch").innerHTML = "<b>Dutch</b> : " + curWord[8];
+			if(searchedName == curWord[langSelect.selectedIndex]) {
+				document.getElementById("usen").innerHTML = "<b>USen</b> : " + curWord[0];
+				document.getElementById("krko").innerHTML = "<b>KRko</b> : " + curWord[1];
+				document.getElementById("jpja").innerHTML = "<b>JPja</b> : " + curWord[2];
+				document.getElementById("uses").innerHTML = "<b>USes</b> : " + curWord[3];
+				document.getElementById("usfr").innerHTML = "<b>USfr</b> : " + curWord[4];
+				document.getElementById("cnzh").innerHTML = "<b>CNzh</b> : " + curWord[5];
+				document.getElementById("eude").innerHTML = "<b>EUde</b> : " + curWord[6];
+				document.getElementById("euen").innerHTML = "<b>EUen</b> : " + curWord[7];
+				document.getElementById("eues").innerHTML = "<b>EUes</b> : " + curWord[8];
+				document.getElementById("eufr").innerHTML = "<b>EUfr</b> : " + curWord[9];
+				document.getElementById("euit").innerHTML = "<b>EUit</b> : " + curWord[10];
 				break;
 			}
 		}
-		
+	}
+
+	function onLanguageChanged() {
+		var autoWords = getSelectedLangaugeAutoWords();
+		autocomplete.setAutocomplete(document.getElementById("searchedName"), autoWords)
+	}
+
+	function getSelectedLangaugeAutoWords() {
+		var langSelect = document.getElementById("languageSelect");
+		var autoWords = new Array(words.length);
+		for(i=0; i<words.length; i++) {
+			autoWords[i] = words[i][langSelect.selectedIndex];
+		}
+		return autoWords;
 	}
 </script>
 <html>
@@ -29,19 +48,36 @@
 			<meta charset="utf-8"/>
 		</head>
 		<body>
+			<div class="selectLanguage" onchange="onLanguageChanged()">
+				<select id="languageSelect">
+					<option value="usen">USen</option>
+					<option value="krko" selected>KRko</option>
+					<option value="jpja">JPja</option>
+					<option value="uses">USes</option>
+					<option value="usfr">USfr</option>
+					<option value="cnzh">CNzh</option>
+					<option value="eude">EUde</option>
+					<option value="euen">EUen</option>
+					<option value="eues">EUes</option>
+					<option value="eufr">EUfr</option>
+					<option value="euit">EUit</option>
+				</select>
+			</div>
 			<div class="srch_form autocomplete">
 				<input id="searchedName">
 			</div>
 			<button onclick="onSearch()">검색</button>
 			<br><br><br>
-			<div id="english"><b>English</b> : </div>
-			<div id="chinese"><b>Chinese</b> : </div>
-			<div id="german"><b>German</b> : </div>
-			<div id="spanish"><b>Spanish</b> : </div>
-			<div id="french"><b>French</b> : </div>
-			<div id="italian"><b>Italian</b> : </div>
-			<div id="japanese"><b>Japanese</b> : </div>
-			<div id="korean"><b>Korean</b> : </div>
-			<div id="dutch"><b>Dutch</b> : </div>
+			<div id="usen"><b>USen</b> : </div>
+			<div id="krko"><b>KRko</b> : </div>
+			<div id="jpja"><b>JPja</b> : </div>
+			<div id="uses"><b>USes</b> : </div>
+			<div id="usfr"><b>USfr</b> : </div>
+			<div id="cnzh"><b>CNzh</b> : </div>
+			<div id="eude"><b>EUde</b> : </div>
+			<div id="euen"><b>EUen</b> : </div>
+			<div id="eues"><b>EUes</b> : </div>
+			<div id="eufr"><b>EUfr</b> : </div>
+			<div id="euit"><b>EUit</b> : </div>
 		</body>
 </html>
