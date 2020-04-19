@@ -4,9 +4,65 @@
 <link rel="stylesheet" href="./index.css">
 <script type="text/javascript" src="./autocomplete.js"></script>
 <script>
+	var languages = ["usen", "krko", "jpja", "uses", "usfr", "cnzh", "eude", "euen", "eues", "eufr", "euit", "euru"];
+	var languageSet = {
+		"en": ["Language", "Search", "English", "Korean", "Japanese", "Spanish", "French", "Chinese", "German", "English-Eu", "Spanish-Eu", "French-Eu", "Italian", "Russian"],
+		"ko": ["언어", "검색", "영어", "한국어", "일본어", "스페인어", "프랑스어", "중국어", "독일어", "영어-Eu", "스페인어-Eu", "프랑스어-Eu", "이탈리아어", "러시아어"],
+		"ja": ["言語", "探す", "英語", "韓国語", "日本語", "スペイン語", "フランス語", "中国語", "ドイツ語", "英語-Eu", "スペイン語-Eu", "フランス語-Eu", "イタリア語", "ロシア語"],
+		"es": ["Idioma", "Buscar", "Inglés", "coreano", "japonés", "español", "francés", "chino", "alemán", "Inglés-Eu", "español-Eu", "francés-Eu", "italiano", "ruso"],
+		"fr": ["Langue", "Chercher", "Anglais", "coréen", "japonais", "espagnol", "français", "chinois", "allemand", "Anglais-Eu", "espagnol-Eu", "français-Eu", "italien", "russe"],
+		"zh": ["语言", "搜索", "英语", "韩国语", "日语", "西班牙语", "法语", "汉语", "德语", "英语-Eu", "西班牙语-Eu", "法语-Eu", "意大利语", "俄语"],
+		"de": ["Sprache", "Suche", "Englisch", "Koreanisch", "Japanisch", "Spanisch", "Französisch", "Chinesisch", "Deutsch", "Englisch-Eu", "Spanisch-Eu", "Französisch-Eu", "Italienisch", "Russisch"],
+		"it": ["linguaggio", "Ricerca", "inglese", "coreano", "giapponese", "spagnolo", "francese", "cinese", "tedesco", "inglese-Eu", "spagnolo-Eu", "francese-Eu", "italiano", "russo"],
+		"ru": ["язык", "Поиск", "английский", "корейский", "японский", "испанский", "французский", "китайский", "немецкий", "английский-Eu", "испанский-Eu", "французский-Eu", "итальянский", "русский"]
+	};
+	var langCode;
 	window.onload = function () { 
-			var autoWords = getSelectedLangaugeAutoWords();
-			autocomplete.setAutocomplete(document.getElementById("searchedName"), autoWords)
+			langCode = navigator.language.substr(0, 2);
+			console.log(langCode);
+
+			for(i=0; i<languages.length; i++) {
+				var op = new Option();
+    			op.value = languages[i];
+    			op.text = languageSet[langCode][i + 2];
+    			document.getElementById("languageSelect").add(op);
+			}
+
+			switch(langCode) {
+				case "en":
+					document.getElementById("languageSelect")[0].selected = true;
+					break;
+				case "ko":
+					document.getElementById("languageSelect")[1].selected = true;
+					break;
+				case "ja":
+					document.getElementById("languageSelect")[2].selected = true;
+					break;
+				case "es":
+					document.getElementById("languageSelect")[8].selected = true;
+					break;
+				case "fr":
+					document.getElementById("languageSelect")[9].selected = true;
+					break;
+				case "zh":
+					document.getElementById("languageSelect")[5].selected = true;
+					break;
+				case "de":
+					document.getElementById("languageSelect")[6].selected = true;
+					break;
+				case "it":
+					document.getElementById("languageSelect")[10].selected = true;
+					break;
+				default:
+					document.getElementById("languageSelect")[0].selected = true;
+					break;
+			}
+			onLanguageChanged();
+			for(i=0; i<languages.length; i++) {
+				document.getElementById(languages[i]).innerHTML = "<b>" + languageSet[langCode][i + 2] + "</b> : ";
+			}
+			document.getElementById("searchButton").innerText = languageSet[langCode][1];
+			document.getElementById("languageText").innerText = languageSet[langCode][0];
 		};
 	function onSearch() {
 		langSelect = document.getElementById("languageSelect");
@@ -14,17 +70,9 @@
 		for(word in words) {
 			var curWord = words[word];
 			if(searchedName == curWord[langSelect.selectedIndex]) {
-				document.getElementById("usen").innerHTML = "<b>USen</b> : " + curWord[0];
-				document.getElementById("krko").innerHTML = "<b>KRko</b> : " + curWord[1];
-				document.getElementById("jpja").innerHTML = "<b>JPja</b> : " + curWord[2];
-				document.getElementById("uses").innerHTML = "<b>USes</b> : " + curWord[3];
-				document.getElementById("usfr").innerHTML = "<b>USfr</b> : " + curWord[4];
-				document.getElementById("cnzh").innerHTML = "<b>CNzh</b> : " + curWord[5];
-				document.getElementById("eude").innerHTML = "<b>EUde</b> : " + curWord[6];
-				document.getElementById("euen").innerHTML = "<b>EUen</b> : " + curWord[7];
-				document.getElementById("eues").innerHTML = "<b>EUes</b> : " + curWord[8];
-				document.getElementById("eufr").innerHTML = "<b>EUfr</b> : " + curWord[9];
-				document.getElementById("euit").innerHTML = "<b>EUit</b> : " + curWord[10];
+				for(i=0; i<languages.length; i++) {
+				document.getElementById(languages[i]).innerHTML = "<b>" + languageSet[langCode][i + 2] + "</b> : " + curWord[i];
+				}
 				break;
 			}
 		}
@@ -54,26 +102,15 @@
 				<b>ACNH<br>UnLocalize</b>
 			</div>
 			<div class="selectLanguage" onchange="onLanguageChanged()">
-				Languague
+				<span id="languageText">Language</span>
 				<select id="languageSelect">
-					<option value="usen">USen</option>
-					<option value="krko" selected>KRko</option>
-					<option value="jpja">JPja</option>
-					<option value="uses">USes</option>
-					<option value="usfr">USfr</option>
-					<option value="cnzh">CNzh</option>
-					<option value="eude">EUde</option>
-					<option value="euen">EUen</option>
-					<option value="eues">EUes</option>
-					<option value="eufr">EUfr</option>
-					<option value="euit">EUit</option>
 				</select>
 			</div>
 			<br>
 			<div class="srch_form autocomplete">
 				<input id="searchedName">
 			</div>
-			<button onclick="onSearch()">검색</button>
+			<button id="searchButton" onclick="onSearch()">Search</button>
 			<br><br>
 			<hr class="separateLine"/>
 			<br><br><br>
@@ -89,6 +126,7 @@
 				<div id="eues"><b>EUes</b> : </div>
 				<div id="eufr"><b>EUfr</b> : </div>
 				<div id="euit"><b>EUit</b> : </div>
+				<div id="euru"><b>EUru</b> : </div>
 			</div>
 		</body>
 </html>
